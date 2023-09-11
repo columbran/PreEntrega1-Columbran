@@ -7,7 +7,7 @@ function Titulo(props) {
         </h1>
         <h2 className="h4 text-secondary">
           {props.subtitulo}
-        </h2>
+        </h2> 
       </div>
     )
   }
