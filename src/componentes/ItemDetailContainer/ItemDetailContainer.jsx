@@ -5,20 +5,20 @@ import {  doc, getDoc, getFirestore } from 'firebase/firestore'
 
 const ItemDetailContainer = () => {
    
-  const [producto, setProducto] = useState ({})
+  const [product, setProduct] = useState ({})
   const {pid} = useParams ()
 
   useEffect(()=>{
         const db = getFirestore()
-        const queryDoc = doc(db, 'productos', pid)
+        const queryDoc = doc(db, 'products', pid)
          getDoc(queryDoc)
          .then(resp => ( { id: resp.id, ...resp.data() } ) )
-         .then(resp => setProducto(resp))
+         .then(resp => setProduct(resp))
      }, [])
     
   return (
     <div>
-        <ItemDetail producto={producto}/>
+        <ItemDetail product={product}/>
     </div>
   )
 }

@@ -5,7 +5,7 @@ import ItemCount from "../Counter/ItemCount";
 
 
 
-const ItemDetail = ( {producto} ) => {
+const ItemDetail = ( {product} ) => {
 
   const [isInCount, setisInCount ] = useState (true)
 
@@ -13,43 +13,42 @@ const ItemDetail = ( {producto} ) => {
     
     const onAdd = (quantity) => {
     
-      addProduct ({...producto, quantity})
+      addProduct ({...product, quantity})
       setisInCount (false)
       
     }
-git log
+
     
   return (
-    <div className="row bg-light">
-    <h2 className="text-primary">VISTA DE DETALLE</h2>
-    <div className="col">
-    <img className="w-25" src={producto.imgUrl} alt="imagen prenda" />
-    <div className="">
-      <p className="text-muted"><strong>Nombre:</strong> {producto.name} </p>
-      <p className="text-muted"><strong>Descripción:</strong> {producto.descripcion} </p>
-      <p className="text-muted"><strong>Stock:</strong>: {producto.stock} </p>
-      <p className="text-muted"><strong>Precio:</strong>: ${producto.precio} </p>
-      </div> 
+    <div className="container mt-5 bg-light ">
+    <h2 className="running-title">DETALLE</h2>
+    <div className="row justify-content-center align-items-center">
+    <div className="col-md-4">
+          <img className="w-100 rounded" src={product.imgUrl} alt="imagen prenda" />
+        </div>
+        <div className="col-md-6">
+          <p className="text-muted"><strong>Nombre:</strong> {product.name} </p>
+          <p className="text-muted"><strong>Descripción:</strong> {product.description} </p>
+          <p className="text-muted"><strong>Stock:</strong>: {product.stock} </p>
+          <p ><strong>Precio:</strong>: ${product.price} </p>
+        </div>
+      </div>
 
-    <div className="col">  
-    {isInCount ?
-    <ItemCount initial={1}  stock={producto.stock} onAdd={onAdd}/>
-       :
-         <> 
-          <Link to= {'/contador'}>
-          <button className="btn btn-primary">ir al carrito</button>
-          </Link>
-          <Link to= {'/'}>
-          <button className="btn btn-secondary">Sseguir comprando</button>
-          </Link>
-         </>
-    } 
-    </div>
-
-    </div>
-    </div>
-
-  )
-}
-
-export default ItemDetail;
+      <div className=" d-flex justify-content-center align-items-center mt-3">
+        {isInCount ? (
+          <ItemCount initial={1} stock={product.stock} onAdd={onAdd} />
+          ) : (
+            <div className="d-flex justify-content-center mt-3">
+              
+              <Link to="/" className="btn btn-secondary ">Seguir comprando</Link>
+              
+              <Link to="/contador" className="btn btn-primary">Ir al carrito</Link>
+              
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  }
+  
+  export default ItemDetail;

@@ -1,7 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
+import { HashRouter, Routes, Route } from 'react-router-dom'; 
 
 import NavBar from './componentes/Navbar/NavBar'
-
 import ItemListContainer from './componentes/ItemListContainer/ItemListContainer'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemDetailContainer from './componentes/ItemDetailContainer/ItemDetailContainer'
@@ -15,25 +14,24 @@ function App() {
 
 
   return (
-    <BrowserRouter>
+    <HashRouter>
      
      <CartContextProvider>
+
      <NavBar />
    
      <Routes>
+
      <Route path='/' element={<ItemListContainer />} />
      <Route path='/categoria/:cid' element={<ItemListContainer />} />
      <Route path='/detalle/:pid' element={<ItemDetailContainer />} />
      <Route path='/contador' element={<CartContainer />} />
      
-     
-  
      </Routes> 
 
-
+     </CartContextProvider>
      
-    </CartContextProvider>
-    </BrowserRouter> 
+    </HashRouter> 
 
    
 

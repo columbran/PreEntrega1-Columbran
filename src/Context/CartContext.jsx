@@ -10,7 +10,7 @@ export const CartContextProvider = ({ children }) => {
 
     const addProduct = (newProduct) => {
 
-      const idx = cartList.findIndex(producto => producto.id === newProduct.id)
+      const idx = cartList.findIndex(product => product.id === newProduct.id)
 
       if (idx != -1) {
 
@@ -23,32 +23,19 @@ export const CartContextProvider = ({ children }) => {
 
 
 
-    const totalQuantity = () => cartList.reduce ((count, objProducto ) => count += objProducto.quantity, 0)
+    const totalQuantity = () => cartList.reduce ((count, objProduct ) => count += objProduct.quantity, 0)
 
-    const totalPrice = () => cartList.reduce ((count, objProducto ) => count += (objProducto.quantity * objProducto.precio), 0)
+    const totalPrice = () => cartList.reduce ((count, objProduct ) => count += (objProduct.quantity * objProduct.price), 0)
 
-    const removeItem = id => setCartList (cartList.filter (producto => producto.id !== id))
+    const removeItem = id => setCartList (cartList.filter (product => product.id !== id))
 
-    // const addProduct = (newProduct) =>{
-
-    //     setCartList ([
-    //         ...cartList,
-    //         newProduct
-
-    //     ])
-    // }
+   
   
   const deleteCart = () => {
     setCartList ([])
   }
 
-  // const removeProduct = (productId) => {
-  //   Filtra la lista de productos para eliminar el producto con el ID correspondiente
-  //   const updatedCartList = cartList.filter((product) => product.id !== productId);
-    
-  //   Actualiza el estado del carrito con la nueva lista filtrada
-  //   setCartList(updatedCartList);
-  // };
+  
 
     return (
       <CartContext.Provider value={{
@@ -58,7 +45,7 @@ export const CartContextProvider = ({ children }) => {
         totalQuantity,
         totalPrice,
         removeItem
-        // removeProduct
+        
       }}>
         { children }
       </CartContext.Provider>  

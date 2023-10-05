@@ -22,16 +22,16 @@ const OrderForm = ({ onSubmit }) => {
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    // Validar que los campos obligatorios no estén vacíos
+    
     if (!dataForm.name || !dataForm.phone || !dataForm.email) {
-      // Si hay campos vacíos, establecer errores
+      
       setErrors({
         name: !dataForm.name,
         phone: !dataForm.phone,
         email: !dataForm.email,
       });
     } else {
-      // Si no hay campos vacíos, enviar el formulario
+      
       onSubmit(dataForm);
     }
   };

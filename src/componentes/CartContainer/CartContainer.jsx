@@ -4,7 +4,6 @@ import { useCartContext } from '../../Context/CartContext';
 import { Link } from 'react-router-dom';
 import Form from '../Form/Form';
 
-
 const CartContainer = () => {
   const [dataForm, setDataForm] = useState({
     name: '',
@@ -14,22 +13,18 @@ const CartContainer = () => {
 
   const [id, setId] = useState('');
 
-  const { cartList, deleteCart, removeProduct, totalPrice, removeItem } = useCartContext();
+  const { cartList, deleteCart, totalPrice, removeItem } = useCartContext();
 
   const handleAddOrder = async (orderData) => {
-    // Previene la presentación del formulario por defecto.
-    // evt.preventDefault();
-
-    // Crea un objeto 'order' que incluye la información de contacto del usuario, los elementos en el carrito (transformados para incluir ID, nombre, precio y cantidad) y el precio total.
+    
     const order = {};
     order.buyer = orderData;
     order.items = cartList.map((prod) => {
-      return { id: prod.id, name: prod.name, price: prod.precio, quantity: prod.quantity };
+      return { id: prod.id, name: prod.name, price: prod.price, quantity: prod.quantity };
     });
 
     order.total = totalPrice();
 
-    // Conéctate a Firebase Firestore, crea una referencia a la colección 'orders' y agrega el documento del pedido.
     const queryDB = getFirestore();
     const ordersCollection = collection(queryDB, 'orders');
     addDoc(ordersCollection, order)
@@ -45,7 +40,7 @@ const CartContainer = () => {
       });
   };
 
-  // Función para actualizar el estado cuando los usuarios ingresan su información de contacto.
+  
   const handleOnChange = (evt) => {
     setDataForm({
       ...dataForm,
@@ -54,31 +49,62 @@ const CartContainer = () => {
   };
 
   return (
-    <>
-      {id !== '' && <h3>Se ha generado la compra con el ID: {id}</h3>}
+    <div className="container mt-4">
+    { id !== '' && (
+  <div className="alert alert-success text-center">
+    <h2 className="alert-heading">¡Compra exitosa!</h2>
+    <h4 className="m-0">Se ha generado la compra con el ID: {id}</h4>
+  </div>
+)}
       {cartList.length > 0 ? (
         <div>
           {cartList.map((prod) => (
-            <div key={prod.id}>
-              <img src={prod.imgUrl} className="w-25" alt={prod.name} />
-              {prod.name} -
-              Cantidad: {prod.quantity} -
-              <button onClick={() => removeItem(prod.id)}>X</button>
+            <div key={prod.id} className="row mb-3">
+              <div className="col-md-3">
+                <img
+                  src={prod.imgUrl}
+                  className="img-fluid"
+                  alt={prod.name}
+                />
+              </div>
+              <div className="col-md-6">
+                <h4>{prod.name}</h4>
+                <p >Cantidad: {prod.quantity}</p>
+                <button
+                  className="btn btn-danger"
+                  onClick={() => removeItem(prod.id)}
+                >
+                  Eliminar
+                </button>
+              </div>
             </div>
           ))}
-          <button onClick={deleteCart}>Vaciar carrito</button>
-          {totalPrice() !== 0 && <h2> Precio Total: {totalPrice()} </h2>}
+          <div className="d-flex justify-content-center">
+            <button
+              className="btn btn-warning"
+              onClick={deleteCart}
+            >
+              Vaciar carrito
+            </button>
+          </div>
+          {totalPrice() !== 0 && (
+            <h2 className="mt-4">
+              Precio Total: ${totalPrice()}
+            </h2>
+          )}
 
-          {/* Renderiza el formulario para que los usuarios ingresen su información de contacto y completen la compra. */}
+          
           <Form onSubmit={handleAddOrder} />
         </div>
       ) : (
-        <center>
-          <h2> No hay productos en el carrito</h2>
-          <Link to="/"> Regresa al inicio para comprar</Link>
-        </center>
+        <div className="text-center mt-5">
+          <h2>No hay productos en el carrito</h2>
+          <Link to="/" className="btn btn-primary">
+            Regresar al inicio para comprar
+          </Link>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Swal from 'sweetalert2'; // Importa SweetAlert
+import Swal from 'sweetalert2'; 
 
 const ItemCount = ({ initial, stock, onAdd }) => {
   const [counter, setCounter] = useState(initial);
@@ -15,18 +15,18 @@ const ItemCount = ({ initial, stock, onAdd }) => {
   const handleOnAdd = () => {
     onAdd(counter);
 
-    // Muestra una alerta de SweetAlert cuando se agrega al carrito
+    
     Swal.fire({
       icon: 'success',
       title: 'Producto agregado al carrito',
       showConfirmButton: false,
-      timer: 1500, // Cierra automáticamente después de 1.5 segundos
+      timer: 1500, 
     });
   };
 
   return (
-    <div>
-      <h2>Cantidad: {counter}</h2>
+    <div className="d-flex flex-column align-items-center justify-content-center">
+      <h3>Cantidad: {counter}</h3>
       <div className="d-flex">
         <button className="btn btn-primary me-2" onClick={handleSubtract}>
           -
@@ -35,7 +35,7 @@ const ItemCount = ({ initial, stock, onAdd }) => {
           +
         </button>
       </div>
-      <button className="btn btn-success mt-2" onClick={handleOnAdd}>
+      <button className="btn btn-primary mt-2" onClick={handleOnAdd}>
         Agregar al Carrito
       </button>
     </div>
