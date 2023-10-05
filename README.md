@@ -28,5 +28,5 @@ Este proyecto fue construido utilizando las siguientes librerías externas:
 Agradecimientos especiales a las siguientes personas y tecnologías que contribuyeron en este proyecto:
 
 - Federico Osandon - Profesor de Coderhouse.
-- Nicolas Smael - Tutor y apoyo técnico.git statusd
+- Nicolas Smael - Tutor y apoyo técnico
 - Chat GPT - Contribuyó proporcionando respuestas y orientación útil durante el desarrollo.
